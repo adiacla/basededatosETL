@@ -4,3 +4,4 @@ mysqlclient==2.2.4
 pymongo
 python-dotenv
 pandas
+matplotlib
