@@ -1,16 +1,3 @@
-Aquí tienes el archivo **`README.md`** definitivo y completamente ajustado. Integra tanto la instalación de todo el software requerido en Windows 11 como los dos talleres específicos que se detallan en tus guías de clase: el taller de **MySQL con Python y Airflow** y el taller de **MongoDB con Python**.
-
-Puedes descargar el archivo directamente para agregarlo a tu repositorio de GitHub:
-
-### 📄 Descarga el archivo:
-
-[file-tag: code-generated-file-0-1784221894311543591]
-
----
-
-### 💻 Código Markdown para copiar y pegar:
-
-```markdown
 # Guía de Instalación y Talleres Prácticos: ETL con MySQL, MongoDB y Apache Airflow
 
 Este repositorio contiene los recursos, scripts y configuraciones necesarios para llevar a cabo los talleres prácticos de la asignatura **Nuevos Paradigmas de Bases de Datos**. El objetivo de estos talleres es aprender a extraer, transformar y cargar (ETL) datos usando entornos relacionales (MySQL), no relacionales (MongoDB) y un orquestador de flujos de trabajo profesional (Apache Airflow) de manera integrada con **Visual Studio Code**.
