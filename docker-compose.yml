@@ -34,6 +34,7 @@ services:
     environment:
       - AIRFLOW__CORE__EXECUTOR=SequentialExecutor
       - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      # Conexión usando pymysql (asegúrate de tenerlo en el Dockerfile)
       - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=mysql+pymysql://root:root@mysql:3306/airflow
     volumes:
       - ./airflow/dags:/opt/airflow/dags
