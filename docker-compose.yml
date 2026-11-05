@@ -10,7 +10,7 @@ services:
       - ./mysql/0-create-airflow-db.sql:/docker-entrypoint-initdb.d/0-create-airflow-db.sql
       - ./mysql/db_movies_neflix_transact.sql:/docker-entrypoint-initdb.d/1-db_movies.sql
       - ./mysql/data_warehouse_netflix.sql:/docker-entrypoint-initdb.d/2-dw_netflix.sql
-      - ./mysql/datos:/datos
+      - ./mysql/data:/data
 
   mongodb:
     image: mongo:6.0
@@ -19,7 +19,7 @@ services:
       - "27017:27017"
     volumes:
       - mongodata:/data/db
-      - ./mongo/data:/data/init
+      - ./mongodb/data:/data/init
 
   airflow:
     build:
@@ -34,16 +34,16 @@ services:
     environment:
       - AIRFLOW__CORE__EXECUTOR=LocalExecutor
       - AIRFLOW__CORE__LOAD_EXAMPLES=False
-      # Conexión usando pymysql (asegúrate de tenerlo en el Dockerfile)
       - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=mysql+pymysql://root:root@mysql:3306/airflow
+      - AIRFLOW__DATABASE__LOAD_DEFAULT_CONNECTIONS=False
     volumes:
       - ./airflow/dags:/opt/airflow/dags
       - ./airflow/logs:/opt/airflow/logs
       - ./airflow/plugins:/opt/airflow/plugins
       - ./mysql/data:/data
     command: >
-      bash -c "airflow db init && airflow users create 
-      --username admin --password admin --firstname Admin --lastname User 
+      bash -c "airflow db init && airflow users create
+      --username admin --password admin --firstname Admin --lastname User
       --role Admin --email admin@example.com && airflow webserver"
 
 volumes:
