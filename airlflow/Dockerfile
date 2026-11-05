@@ -1,24 +1,23 @@
-# 1. Actualizamos a una versión de Airflow más moderna y estable con Python 3.11
 FROM apache/airflow:2.10.2-python3.11
-
-# 2. Instalamos dependencias del sistema (¡Solo las estrictamente necesarias!)
+ 
+# Dependencias del sistema (build-essential es necesario para compilar mysqlclient)
 USER root
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    # pkg-config y default-libmysqlclient-dev solo si en el futuro usas 'mysqlclient' (C-binding)
+    build-essential \
     pkg-config \
     default-libmysqlclient-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
-
-# 3. Volvemos al usuario airflow para instalar los paquetes de Python
+ 
+# Paquetes de Python con el constraints oficial de Airflow
+# (evita que pip cambie la version de Airflow o rompa sus dependencias)
 USER airflow
-
-# Actualizamos pip e instalamos las librerías necesarias
-# Nota: Incluimos los "providers" oficiales de Airflow para MySQL y MongoDB.
-RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir \
+ARG AIRFLOW_VERSION=2.10.2
+ARG PYTHON_VERSION=3.11
+RUN pip install --no-cache-dir "apache-airflow==${AIRFLOW_VERSION}" \
     pandas \
     pymysql \
     cryptography \
     apache-airflow-providers-mysql \
-    apache-airflow-providers-mongo
+    apache-airflow-providers-mongo \
+    --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt"
