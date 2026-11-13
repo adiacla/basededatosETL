@@ -197,7 +197,17 @@ Cuando veas que el webserver ya está escuchando en el puerto 8080 (mensajes de 
 docker compose ps
 ```
 
-Debes ver tres servicios en estado `running`, y `mysql` como `healthy`.
+Debes ver tres servicios en estado `running`, y `mysql` como `healthy
+
+Cree sesiones terminal y puedes conectarse mediante
+**Airflow**
+docker compose exec airflow bash
+
+**MySQL**
+docker compose exec mysql bash
+
+**MongoDB**
+docker compose exec mongodb bash
 
 ### 8.2 MySQL
 
