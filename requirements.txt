@@ -1,4 +1,4 @@
-SQLAlchemy==2.0.29
+SQLAlchemy
 pymysql
 cryptography
 pymongo
